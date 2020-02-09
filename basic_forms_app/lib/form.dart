@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(SampleApp());
@@ -43,13 +44,10 @@ class SplashState extends State<Splash> {
   }
 
   void _pushLogin() {
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute<void>(
-            builder: (BuildContext context) {
-              return Login();
-            }
-        ),
-      );
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute<void>(builder: (context) => Login()),
+    );
   }
 }
 
@@ -69,49 +67,54 @@ class LoginState extends State<Login> {
       appBar: AppBar(
         title: Text('Login'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 12.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              TextFormField(
-                onChanged: (text) {
-                  text.toUpperCase();
-                },
-                validator: (value) {
-                  if (value.isEmpty) {
-                    return 'Please enter username';
-                  }
-                  return null;
-                },
-                decoration: InputDecoration(labelText: 'Enter Username'),
+      body: Builder(
+        builder: (BuildContext context) {
+          return Padding(
+            padding:
+                const EdgeInsets.symmetric(vertical: 12.0, horizontal: 12.0),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  TextFormField(
+                    onChanged: (text) {
+                      text.toUpperCase();
+                    },
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return 'Please enter username';
+                      }
+                      return null;
+                    },
+                    decoration: InputDecoration(labelText: 'Enter Username'),
+                  ),
+                  TextFormField(
+                      obscureText: true,
+                      decoration: InputDecoration(labelText: 'Enter Password'),
+                      validator: (value) {
+                        if (value.isEmpty) {
+                          return 'Please enter password';
+                        }
+                        return null;
+                      }),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 12.0),
+                    child: CupertinoButton(
+                      child: Text('Submit'),
+                      onPressed: () {
+                        if (_formKey.currentState.validate()) {
+                          Scaffold.of(context).showSnackBar(
+                              SnackBar(content: Text('Processing Data')));
+                        }
+                      },
+                    ),
+                  ),
+                ],
               ),
-              TextFormField(
-                  obscureText: true,
-                  decoration: InputDecoration(labelText: 'Enter Password'),
-                  validator: (value) {
-                    if (value.isEmpty) {
-                      return 'Please enter password';
-                    }
-                    return null;
-                  }),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 12.0),
-                child: RaisedButton(
-                  child: Text('Submit'),
-                  onPressed: () {
-                    if (_formKey.currentState.validate()) {
-                      Scaffold.of(context).showSnackBar(
-                          SnackBar(content: Text('Processing Data')));
-                    }
-                  },
-                ),
-              ),
-            ],
-          ),
-        ),
+            ),
+          );
+        },
       ),
     );
   }
