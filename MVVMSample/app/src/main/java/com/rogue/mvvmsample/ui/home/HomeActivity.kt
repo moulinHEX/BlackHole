@@ -1,10 +1,8 @@
 package com.rogue.mvvmsample.ui.home
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
 import android.view.View
-import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -13,7 +11,6 @@ import com.google.android.material.snackbar.Snackbar
 import com.rogue.mvvmsample.MyApplication
 import com.rogue.mvvmsample.R
 import com.rogue.mvvmsample.data.User
-import com.rogue.mvvmsample.data.UserRepository
 import kotlinx.android.synthetic.main.activity_home.*
 import javax.inject.Inject
 
