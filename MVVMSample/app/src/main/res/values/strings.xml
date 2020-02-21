@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">MVVMSample</string>
+    <string name="get_users">Get Users</string>
+</resources>
